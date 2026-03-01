@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Card from "./Components/Card";
 import "./App.css";
+import { ranks, suits, createDeck, shuffleDeck } from "./utils/cardUtils";
 
 /**
  * StAuth10244: I Andrew Evboifo, 000909727 certify that this material is my original work. 
@@ -51,13 +52,9 @@ function App() {
     // function to toss selected cards from the player's hand back into the deck
     const tossCard = () => {
       if (pickedCards.length === 0) return;
-      const newHand = [...hand];
-      
-      // sort in descending order to avoid index shifting issues when splicing
-      pickedCards.sort((a, b) => b - a); 
-      pickedCards.forEach(index => {
-        newHand.splice(index, 1);
-      });
+      const newHand = hand.filter(card => !pickedCards.includes(card.id));
+      const tossedCards = hand.filter(card => pickedCards.includes(card.id));
+      setDeck(shuffleDeck([...deck, ...tossedCards])); // add tossed cards back to deck and shuffle 
       setHand(newHand);
       setPickedCards([]);
     }
@@ -77,14 +74,13 @@ function App() {
     }
 
     const wildCard = () => {
-      const suits = ["♥", "♦", "♣", "♠"];
-      const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
       const newCard = {
         rank: ranks[Math.floor(Math.random() * ranks.length)],
-        suit: suits[Math.floor(Math.random() * suits.length)]
+        suit: suits[Math.floor(Math.random() * suits.length)],
+        id: `wild-${Math.random()}`
       };
       setHand([...hand, newCard]);
-    }
+    };
 
 
     return (
@@ -107,9 +103,9 @@ function App() {
                 <Card
                   key={card.id}
                   card={card}
-                  isPicked={pickedCards.includes(index)}
+                  isPicked={pickedCards.includes(card.id)}
                   onClick={() => {
-                    setPickedCards(prev => prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]);
+                    setPickedCards(prev => prev.includes(card.id) ? prev.filter(id => id !== card.id) : [...prev, card.id]);
                   }}
                 />
               ))}

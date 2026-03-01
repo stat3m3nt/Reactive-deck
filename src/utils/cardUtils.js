@@ -15,7 +15,7 @@ export function createDeck() {
             deck.push({ 
                 rank, 
                 suit,
-                id: `${rank}-${suit}=${Math.random()}` // unique identifier for each card
+                id: `${rank}-${suit}-${Math.random()}` // unique identifier for each card
              });
         }
     }

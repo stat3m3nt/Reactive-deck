@@ -2,6 +2,11 @@
  * StAuth10244: I Andrew Evboifo, 000909727 certify that this material is my original work. 
  * No other person's work has been used without due acknowledgement. 
  * I have not made my work available to anyone else.
+ * 
+ * This file contains the Card component which is responsible for rendering a single card in the game.
+ * The Card component takes in props for the card's rank, suit, whether it is selected, and an onClick handler.
+ * It displays the card's rank and suit in the top-left and bottom-right corners, as well as a larger suit symbol in the center.
+ * The color of the card is determined by its suit (red for hearts and diamonds, black for clubs and spades) mimicking real playing cards.
  */
 
 import React from "react";

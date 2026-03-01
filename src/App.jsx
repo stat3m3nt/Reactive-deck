@@ -86,7 +86,12 @@ function App() {
 
     return (
         <div className="App">
+
+          {/* page header */}
+          <header className="App-header">
             <h1>Card Game</h1>
+          </header>
+
             {/* Button controls */}
             <div className="buttons">
               <button onClick={drawCard}>Draw Card  </button>
@@ -99,22 +104,26 @@ function App() {
               <button onClick={shuffle}>Shuffle Deck  </button> 
             </div>
 
-            <div className="hand">
-              {hand.map((card, index) => (
-                <Card
-                  key={card.id}
-                  card={card}
-                  isPicked={pickedCards.includes(card.id)}
-                  onClick={() => {
-                    setPickedCards(prev => prev.includes(card.id) ? prev.filter(id => id !== card.id) : [...prev, card.id]);
-                  }}
-                />
-              ))}
+            <div className="game-section">
+              <div className="status">
+                <h5> Number of Cards in Hand: {hand.length}</h5>
+                <h5> Number of Cards in Deck: {deck.length}</h5>
+              </div>
+
+              <div className="hand">
+                {hand.map((card, index) => (
+                  <Card
+                    key={card.id}
+                    card={card}
+                    isPicked={pickedCards.includes(card.id)}
+                    onClick={() => {
+                      setPickedCards(prev => prev.includes(card.id) ? prev.filter(id => id !== card.id) : [...prev, card.id]);
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-
-
-            <h5> Number of Cards in Hand: {hand.length}</h5>
-            <h5> Number of Cards in Deck: {deck.length}</h5>
+            
         </div>
     );
 }

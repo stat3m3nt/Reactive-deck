@@ -12,7 +12,11 @@ export function createDeck() {
     const deck = [];
     for (const suit of suits) {
         for (const rank of ranks) {
-            deck.push({ rank, suit });
+            deck.push({ 
+                rank, 
+                suit,
+                id: `${rank}-${suit}=${Math.random()}` // unique identifier for each card
+             });
         }
     }
     return deck;

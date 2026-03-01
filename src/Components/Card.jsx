@@ -11,17 +11,11 @@
 
 import React from "react";
 
-function Card({ card, isSelected, onClick }) {
-    if(card.suit === "0xA7" || card.suit === "0xAA"){
-        const cardColor = "black";
-    } else{
-        const cardColor = "red";
-    }
-
+function Card({ card, isPicked, onClick }) {
+    const cardColor = card.suit === "♣" || card.suit === "♠" ? "black" : "red";
     return (
 
-        <div className={`card ${isSelected ? "selected" : ""}`} onClick={onClick} style={{ color: cardColor }}>
-            {/* {card.rank} of {card.suit} */}
+        <div className={`card ${isPicked ? "picked" : ""}`} onClick={onClick} style={{ color: cardColor }}>
 
             {/* Card rank and suit for top left corner of card */}
             <div className = "vertex left-top" style={{ color: cardColor }}>

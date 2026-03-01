@@ -50,7 +50,7 @@ function App() {
 
     // function to toss selected cards from the player's hand back into the deck
     const tossCard = () => {
-      if (pickedCards === 0) return;
+      if (pickedCards.length === 0) return;
       const newHand = [...hand];
       
       // sort in descending order to avoid index shifting issues when splicing
@@ -90,7 +90,7 @@ function App() {
     return (
         <div className="App">
             <h1>Card Game</h1>
-
+            {/* Button controls */}
             <div className="buttons">
               <button onClick={drawCard}>Draw Card  </button>
               <button onClick={tossCard}>Toss Card  </button>
@@ -101,11 +101,11 @@ function App() {
               <button onClick={() => dealCards(7)}>Deal 7 Cards  </button>
               <button onClick={shuffle}>Shuffle Deck  </button> 
             </div>
-            
+
             <div className="hand">
               {hand.map((card, index) => (
                 <Card
-                  key={index}
+                  key={card.id}
                   card={card}
                   isPicked={pickedCards.includes(index)}
                   onClick={() => {
@@ -114,6 +114,10 @@ function App() {
                 />
               ))}
             </div>
+
+
+            <h5> Number of Cards in Hand: {hand.length}</h5>
+            <h5> Number of Cards in Deck: {deck.length}</h5>
         </div>
     );
 }

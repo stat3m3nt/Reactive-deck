@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 // src/App.jsx
 import React from "react";
-import Card from "./components/Card";
+import Card from "./Components/Card.jsx";
 
 function App() {
   const [count, setCount] = useState(0);

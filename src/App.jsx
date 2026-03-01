@@ -15,13 +15,16 @@ import "./App.css";
 
 function App() {
   // hooks to create state variables for the deck of cards, the player's hand, and the selected cards
-    const [deck, setDeck] = useState(createDeck());
+    const [deck, setDeck] = useState(shuffleDeck(createDeck())); // initialize deck with a shuffled standard 52-card deck
     const [hand, setHand] = useState([]);
     const [pickedCards, setPickedCards] = useState([]);
 
+  // function to shuffle the deck of cards using the shuffleDeck utility function
+  const shuffle = () => {
+    setDeck(shuffleDeck([...deck]));
+  };
 
-  
-  // selects random card from the deck and adds it to the player's hand only if there are more cards in the deck
+  // function to draw a card from the deck and add it to the player's hand
     const drawCard = () => {
         if (deck.length > 0) {
             const newDeck = [...deck];
@@ -31,21 +34,21 @@ function App() {
         } else alert("No more cards in the deck!");
     };
 
+    // function to deal a specified number of cards from the deck to the player's hand
     const dealCards = (num) => {
         if (deck.length >= num) {
             const newDeck = [...deck];
             const newHand = [];
             for (let i = 0; i < num; i++) {
-                const card = newDeck.pop();
-                newHand.push(card);
+              newHand.push(newDeck.pop());
             }
             setDeck(newDeck);
             setHand(newHand);
-            setPickedCards([]);
+            setPickedCards([]); 
         } else alert("Not enough cards in the deck to deal!");
     }; 
 
-    // toss card
+    // function to toss selected cards from the player's hand back into the deck
     const tossCard = () => {
       if (pickedCards === null) return;
       const newHand = [...hand];
@@ -61,22 +64,40 @@ function App() {
 
     // reset game
     const resetGame = () => {
-      setDeck([...deck, ...hand]);
+      const newDeck = shuffleDeck([...deck, ...hand]);
+      setDeck(newDeck);
       setHand([]);
       setPickedCards([]);
     }
-    // shuffles deck after reset
-    setDeck(shuffleDeck([...deck, ...hand]));
-    setPickedCards([]);
+    
+    // function to regroup the player's hand by shuffling the cards in their hand
+    const regroup = () => {
+      setHand(shuffleDeck([...hand]));
+      setPickedCards([]);
+    }
 
+    const wildCard = () => {
+      const suits = ["♥", "♦", "♣", "♠"];
+      const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+      const newCard = {
+        rank: ranks[Math.floor(Math.random() * ranks.length)],
+        suit: suits[Math.floor(Math.random() * suits.length)]
+      };
+      setHand([...hand, newCard]);
+    }
 
 
     return (
         <div className="App">
             <h1>Card Game</h1>
-            <button onClick={drawCard}>Draw Card  </button>
-            <button onClick={tossCard}>Toss Card  </button>
-            <div className="hand">
+
+            <div className="buttons">
+              <button onClick={drawCard}>Draw Card  </button>
+              <button onClick={tossCard}>Toss Card  </button>
+              <button onClick={regroup}>Regroup Hand  </button>
+              <button onClick={wildCard}>Wild Card  </button>
+              <button onClick={resetGame}>Reset Game  </button>
+              <div className="hand">
                 {hand.map((card, index) => (
                     <Card
                         key={index}
@@ -92,6 +113,7 @@ function App() {
                         }}
                     />
                 ))}
+            </div>
             </div>
         </div>
     );

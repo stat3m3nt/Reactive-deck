@@ -2,12 +2,21 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+// src/App.jsx
+import React from "react";
+import Card from "./components/Card";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+    const testCard = { rank: "A", suit: "♥" };
+
 
   return (
     <>
+       <div style={{ padding: "20px" }}>
+      <h1>Card Test</h1>
+      <Card card={testCard} isPicked={false} onClick={() => alert("Clicked!")} />
+    </div>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />

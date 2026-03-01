@@ -50,7 +50,7 @@ function App() {
 
     // function to toss selected cards from the player's hand back into the deck
     const tossCard = () => {
-      if (pickedCards === null) return;
+      if (pickedCards === 0) return;
       const newHand = [...hand];
       
       // sort in descending order to avoid index shifting issues when splicing
@@ -97,23 +97,22 @@ function App() {
               <button onClick={regroup}>Regroup Hand  </button>
               <button onClick={wildCard}>Wild Card  </button>
               <button onClick={resetGame}>Reset Game  </button>
-              <div className="hand">
-                {hand.map((card, index) => (
-                    <Card
-                        key={index}
-                        card={card}
-                        isPicked={pickedCards.includes(index)}
-                        onClick={() => {
-                            // if (pickedCards.includes(index)) {
-                            //     setPickedCards(pickedCards.filter(i => i !== index));
-                            // } else {
-                            //     setPickedCards([...pickedCards, index]);
-                            // }
-                            setPickedCards(prev => prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]);
-                        }}
-                    />
-                ))}
+              <button onClick={() => dealCards(5)}>Deal 5 Cards  </button>
+              <button onClick={() => dealCards(7)}>Deal 7 Cards  </button>
+              <button onClick={shuffle}>Shuffle Deck  </button> 
             </div>
+            
+            <div className="hand">
+              {hand.map((card, index) => (
+                <Card
+                  key={index}
+                  card={card}
+                  isPicked={pickedCards.includes(index)}
+                  onClick={() => {
+                    setPickedCards(prev => prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]);
+                  }}
+                />
+              ))}
             </div>
         </div>
     );

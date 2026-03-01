@@ -1,42 +1,58 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+/**
+ * StAuth10244: I Andrew Evboifo, 000909727 certify that this material is my original work. 
+ * No other person's work has been used without due acknowledgement. 
+ * I have not made my work available to anyone else.
+ * 
+ */
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+ .card{
+  width: 100px;
+  height: 170px;
+  background-color: white;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s; 
+ }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+  .card:hover {
+    transform: translateY(-5px);
   }
-  to {
-    transform: rotate(360deg);
+
+  .selected {
+    border: 3px solid blue;
+  } 
+
+  .picked {
+    border: 3px solid green;
+  } 
+
+  .vertex {
+    display: flex;
+    flex-direction: column;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .left-top {
+    align-self: flex-start;
   }
-}
+  .right-bottom {
+    align-self: flex-end;
+    transform: rotate(180deg);
+  }
 
-.card {
-  padding: 2em;
-}
+  .controls {
+    margin: 20px;
+  } 
 
-.read-the-docs {
-  color: #888;
-}
+  .hand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  

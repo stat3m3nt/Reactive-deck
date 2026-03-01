@@ -1,8 +1,3 @@
-import React, { useState } from "react";
-import Card from "./Components/Card";
-import "./App.css";
-import { ranks, suits, createDeck, shuffleDeck } from "./utils/cardUtils";
-
 /**
  * StAuth10244: I Andrew Evboifo, 000909727 certify that this material is my original work. 
  * No other person's work has been used without due acknowledgement. 
@@ -13,6 +8,12 @@ import { ranks, suits, createDeck, shuffleDeck } from "./utils/cardUtils";
  * It renders a button to shuffle the deck and a grid of Card components representing the player's hand.
  * The App component also handles the logic for selecting and deselecting cards when they are clicked.
  */
+
+import React, { useState } from "react";
+import Card from "./Components/Card";
+import "./App.css";
+import { ranks, suits, createDeck, shuffleDeck } from "./utils/cardUtils";
+
 
 function App() {
   // hooks to create state variables for the deck of cards, the player's hand, and the selected cards

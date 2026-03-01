@@ -13,6 +13,14 @@ import React from "react";
 
 function Card({ card, isPicked, onClick }) {
     const cardColor = card.suit === "♣" || card.suit === "♠" ? "black" : "red";
+
+    const getCenterSuit = () =>{
+        if (card.rank === "K") return "♚";
+        if (card.rank === "Q") return "♛";
+        if (card.rank === "J") return "♝";
+        return card.suit;
+    };
+    
     return (
 
         <div className={`card ${isPicked ? "picked" : ""}`} onClick={onClick} style={{ color: cardColor }}>
@@ -23,16 +31,18 @@ function Card({ card, isPicked, onClick }) {
                 <div className="cardSuit">{card.suit}</div>
             </div>
 
+            {/* Display center suit */}
+            <div className = "center-suit" style={{ color: cardColor }}>
+                <div className="cardSuit">{getCenterSuit()}</div>
+            </div>
+
             {/* Display the card rank and suit in the bottom-right corner */}
             <div className = "vertex right-bottom" style={{ color: cardColor }}>
                 <div className="cardRank">{card.rank}</div>
                 <div className="cardSuit">{card.suit}</div>
             </div>
 
-            {/* Display center suit */}
-            <div className = "center-suit" style={{ color: cardColor }}>
-                <div className="cardSuit">{card.suit}</div>
-            </div>
+            
         </div>
     );
 }

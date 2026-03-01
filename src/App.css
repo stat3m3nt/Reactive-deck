@@ -53,6 +53,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
   }
 
   .center-suit {
@@ -94,6 +95,10 @@
     transition: background-color 0.3s ease;
 
   } 
+
+  button:hover{
+    background-color: red;
+  }
 
   .game-section{
     display: flex;

@@ -105,6 +105,14 @@ function App() {
             </div>
 
             <div className="game-section">
+              {/* Deck rectangle */}
+              <div 
+                className="deck" 
+                onClick={deck.length > 0 ? drawCard : null}
+                style={{backgrou}}>  
+                  {deck.length > 0 ? <h3>Deck ({deck.length} cards)</h3> : <h3>Deck is Empty</h3>}
+              </div>
+
               <div className="status">
                 <h5> Number of Cards in Hand: {hand.length}</h5>
                 <h5> Number of Cards in Deck: {deck.length}</h5>

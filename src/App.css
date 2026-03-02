@@ -26,6 +26,10 @@
   transition: transform 0.2s; 
  }
 
+ .wild-card{
+    box-shadow: 0 0 20px gold;
+ }
+
   .card:hover {
     transform: translateY(-5px);
     border: 4px solid rgb(0, 217, 255);
@@ -120,7 +124,7 @@
     width: 150px;
     height: 200px;
     border: 3px dashed black;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 10px;
     /* background-color: white;
     cursor: pointer; */

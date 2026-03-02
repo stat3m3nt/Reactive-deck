@@ -63,11 +63,11 @@ function App() {
 
     // reset game
     const resetGame = () => {
-      const newDeck = shuffleDeck([...deck, ...hand]);
+      const newDeck = shuffleDeck(createDeck());
       setDeck(newDeck);
       setHand([]);
       setPickedCardId(null);
-    }
+    };
     
     // function to regroup the player's hand by shuffling the cards in their hand
     const regroup = () => {

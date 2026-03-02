@@ -121,8 +121,8 @@
     height: 200px;
     border: 2px dashed black;
     border-radius: 10px;
-    background-color: white;
-    cursor: pointer;
+    /* background-color: white;
+    cursor: pointer; */
   }
 
   .deck:empty{

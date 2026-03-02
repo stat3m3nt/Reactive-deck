@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import Card from "./Components/Card";
 import "./App.css";
 import { ranks, suits, createDeck, shuffleDeck } from "./utils/cardUtils";
+import deckImage from "./assets/playing-cards-cover.png";
 
 
 function App() {
@@ -107,9 +108,9 @@ function App() {
             <div className="game-section">
               {/* Deck rectangle */}
               <div 
-                className="deck" 
-                onClick={deck.length > 0 ? drawCard : null}
-                style={{backgrou}}>  
+                className={`deck ${deck.length ? "has-cards" : "empty"}`}
+                onClick={deck.length ? drawCard : null}
+                style={{backgroundColor: deck.length > 0 ? `url(${deckImage}) ` : "#1e6141", cursor: deck.length > 0 ? "pointer" : "not-allowed"}}>  
                   {deck.length > 0 ? <h3>Deck ({deck.length} cards)</h3> : <h3>Deck is Empty</h3>}
               </div>
 

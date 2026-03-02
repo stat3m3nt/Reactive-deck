@@ -28,6 +28,7 @@
 
   .card:hover {
     transform: translateY(-5px);
+    border: 4px solid rgb(0, 217, 255);
   }
 
   
@@ -118,7 +119,8 @@
     margin: 20px;
     width: 150px;
     height: 200px;
-    border: 2px dashed black;
+    border: 3px dashed black;
+    padding: 10px;
     border-radius: 10px;
     /* background-color: white;
     cursor: pointer; */
@@ -126,12 +128,19 @@
 
   .deck:empty{
     cursor:default;
-    background-color: transparent;
+    background-color: #1e6141;
+    background-image: none;
   }
 
   .deck.has-cards {
-    background-size: contain;
+    background-image: url('./assets/playing-cards-cover.png');
+    background-size: cover;
     background-position: center; 
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 150px;
 
   }

@@ -14,6 +14,7 @@ import React from "react";
 function Card({ card, isPicked, onClick }) {
     const cardColor = card.suit === "♣" || card.suit === "♠" ? "black" : "red";
 
+    // getCenterSuit function determines the symbol to display in the center of the card based on its rank
     const getCenterSuit = () =>{
         if (card.rank === "K") return "♚";
         if (card.rank === "Q") return "♛";
@@ -21,9 +22,13 @@ function Card({ card, isPicked, onClick }) {
         return card.suit;
     };
     
+    const isWildCard = card.id.startsWith("wild-");
+
     return (
 
-        <div className={`card ${isPicked ? "picked" : ""}`} onClick={onClick} style={{ color: cardColor }}>
+        <div 
+            className={`card ${isPicked ? "picked" : ""} ${isWildCard ? "wild-card" : ""}`} 
+            onClick={onClick}>
 
             {/* Card rank and suit for top left corner of card */}
             <div className = "vertex left-top" style={{ color: cardColor }}>

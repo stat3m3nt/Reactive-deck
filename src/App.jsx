@@ -109,13 +109,7 @@ function App() {
               {/* Deck rectangle */}
               <div 
                 className={`deck ${deck.length ? "has-cards" : "empty"}`}
-                onClick={deck.length ? drawCard : null}
-                style={{
-                  backgroundImage: deck.length > 0 ? `url(${deckImage}) ` : "#1e6141",
-                  cursor: deck.length > 0 ? "pointer" : "not-allowed",
-                }}
-                  >  
-                  {deck.length > 0 ? <h3>Deck ({deck.length} cards)</h3> : <h3>Deck is Empty</h3>}
+                onClick={deck.length ? drawCard : null}>  
               </div>
 
               <div className="status">

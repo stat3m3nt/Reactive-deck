@@ -20,7 +20,7 @@ function App() {
   // hooks to create state variables for the deck of cards, the player's hand, and the selected cards
     const [deck, setDeck] = useState(shuffleDeck(createDeck())); // initialize deck with a shuffled standard 52-card deck
     const [hand, setHand] = useState([]);
-    const [pickedCards, setPickedCards] = useState([]);
+    const [pickedCardId, setPickedCardId] = useState(null);
 
   // function to shuffle the deck of cards using the shuffleDeck utility function
   const shuffle = () => {
@@ -47,18 +47,18 @@ function App() {
             }
             setDeck(newDeck);
             setHand(newHand);
-            setPickedCards([]); 
+            setPickedCardId(null); 
         } else alert("Not enough cards in the deck to deal!");
     }; 
 
     // function to toss selected cards from the player's hand back into the deck
     const tossCard = () => {
-      if (pickedCards.length === 0) return;
-      const newHand = hand.filter(card => !pickedCards.includes(card.id));
-      const tossedCards = hand.filter(card => pickedCards.includes(card.id));
-      setDeck(shuffleDeck([...deck, ...tossedCards])); // add tossed cards back to deck and shuffle 
+      if (pickedCardId === null) return;
+      const newHand = hand.filter(card => card.id !== pickedCardId);
+      const tossedCard = hand.find(card => card.id === pickedCardId);
+      setDeck(shuffleDeck([...deck, tossedCard])); // add tossed card back to deck and shuffle 
       setHand(newHand);
-      setPickedCards([]);
+      setPickedCardId(null);
     }
 
     // reset game
@@ -66,13 +66,13 @@ function App() {
       const newDeck = shuffleDeck([...deck, ...hand]);
       setDeck(newDeck);
       setHand([]);
-      setPickedCards([]);
+      setPickedCardId(null);
     }
     
     // function to regroup the player's hand by shuffling the cards in their hand
     const regroup = () => {
       setHand(shuffleDeck([...hand]));
-      setPickedCards([]);
+      setPickedCardId(null);
     }
 
     const wildCard = () => {
@@ -84,6 +84,33 @@ function App() {
       setHand([...hand, newCard]);
     };
 
+    // function to handle card clicks for selecting and deselecting cards in the player's hand
+    function handleCardClick(cardId) {
+
+      if(pickedCardId === null){
+        setPickedCardId(cardId);
+        return;
+      }
+
+      if (pickedCardId === cardId) {
+        setPickedCardId(null);
+        return;
+      }
+
+      // Swap the positions of the two cards in the hand
+      setHand(prevHand => {
+        const newHand = [...prevHand];
+        const index1 = newHand.findIndex(card => card.id === pickedCardId);
+        const index2 = newHand.findIndex(card => card.id === cardId);
+
+        // Swap the cards at index1 and index2
+        [newHand[index1], newHand[index2]] = [newHand[index2], newHand[index1]];
+        return newHand;
+      });
+
+      // Reset the picked card ID after swapping
+      setPickedCardId(null);
+    }
 
     return (
         <div className="App">
@@ -122,10 +149,11 @@ function App() {
                   <Card
                     key={card.id}
                     card={card}
-                    isPicked={pickedCards.includes(card.id)}
-                    onClick={() => {
-                      setPickedCards(prev => prev.includes(card.id) ? prev.filter(id => id !== card.id) : [...prev, card.id]);
-                    }}
+                    isPicked={pickedCardId === card.id}
+                    onClick={() => 
+                      // setPickedCards(prev => prev.includes(card.id) ? prev.filter(id => id !== card.id) : [...prev, card.id]);
+                      handleCardClick(card.id)
+                    }
                   />
                 ))}
               </div>
